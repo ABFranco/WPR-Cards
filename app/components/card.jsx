@@ -15,16 +15,28 @@ export default class Card extends React.Component {
       subtitle: props.wpObject.subtitle,
       resource_desc: props.wpObject.resource_desc,
       resource_links: props.wpObject.resource_links,
-      height: props.wpObject.height
+      height: props.wpObject.height,
+      data: ""
     };
 
     this.fetchWP = new fetchWP({
         restURL: this.props.wpObject.api_url,
         restNonce: this.props.wpObject.api_nonce,
-        });
+    });
+    
   }
 
-  
+  componentDidMount() {
+    var self = this;
+    fetch('https://api.kanye.rest')
+      .then(function(response) {
+        return response.json()
+      }).then(function(data) {
+        self.setState({data: data.quote});
+      });
+  }
+
+
 
   render() {
     const divStyle = {
@@ -54,7 +66,7 @@ export default class Card extends React.Component {
         <img className="wdr-card-img" src={this.state.image_src}/>
         <p className="wdr-card-subtitle">{this.state.subtitle}</p>
         <div className="wdr-card-details" style={divStyle}>
-          {resource_html}
+          {this.state.data}
         </div>
       </div>
     );
