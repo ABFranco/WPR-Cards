@@ -55,7 +55,7 @@ class Shortcode {
 		$this->plugin_slug = $plugin->get_plugin_slug();
 		$this->version = $plugin->get_plugin_version();
 
-		add_shortcode( 'wpr-contact-form', array( $this, 'shortcode' ) ); // Change the shortcode tag to 'wpr-contact-form'
+		add_shortcode( 'wpr-cards', array( $this, 'shortcode' ) );
 	}
 
 
@@ -85,7 +85,13 @@ class Shortcode {
 		$object_name = 'wpr_object_' . uniqid();
 
 		$object = shortcode_atts( array(
-			'title'       => 'Hello world',
+			'title'       => '',
+			'title_url'       => '',
+			'image_src'	=> '',
+			'subtitle'       => '',
+			'resource_desc'  => '',
+			'resource_links'  => '',
+			'height'  => '150px',
 			'api_nonce'   => wp_create_nonce( 'wp_rest' ),
 			'api_url'	  => rest_url( $this->plugin_slug . '/v1/' ),
 		), $atts, 'wp-reactivate' );

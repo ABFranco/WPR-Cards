@@ -1,21 +1,19 @@
 <?php
 /**
- * WPR Contact Form
+ * WPR Cards
  *
  *
- * @package   WPR Contact Form
- * @author    Pangolin
+ * @package   WPR Cards
+ * @author    Antonio Franco
  * @license   GPL-3.0
- * @link      https://gopangolin.com
  * @copyright 2018 Pangolin (Pty) Ltd
  *
  * @wordpress-plugin
- * Plugin Name:       WPR Contact Form
+ * Plugin Name:       WPR Cards
  * Plugin URI:        https://gopangolin.com
- * Description:       Basic tutorial on WP-Reactivate usage
- * Version:           1.0.2
- * Author:            pangolin
- * Author URI:        https://gopangolin.com
+ * Description:       Aesthetic cards. Coded using WP-Reactivate
+ * Version:           1.0.0
+ * Author:            Antonio
  * Text Domain:       wp-reactivate
  * License:           GPL-3.0
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
@@ -30,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WP_REACTIVATE_VERSION', '1.0.2' );
+define( 'WP_REACTIVATE_VERSION', '1.0.0' );
 
 
 /**

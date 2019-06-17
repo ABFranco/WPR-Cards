@@ -8,142 +8,21 @@ import Notice from '../components/notice';
 export default class Admin extends Component {
   constructor(props) {
     super(props);
-
-    // Set the default states
-    this.state = {
-      email: '',
-      savedEmail: '',
-      notice: false,
-    };
-
-    this.fetchWP = new fetchWP({
-      restURL: this.props.wpObject.api_url,
-      restNonce: this.props.wpObject.api_nonce,
-    });
-
-    // Get the currently set email address from our /admin endpoint and update the email state accordingly
-    this.getSetting();
   }
 
-  getSetting = () => {
-    this.fetchWP.get( 'admin' )
-    .then(
-      (json) => this.setState({
-        email: json.value,
-        savedEmail: json.value
-      }),
-      (err) => console.log( 'error', err )
-    );
-  };
-
-  updateSetting = () => {
-    this.fetchWP.post( 'admin', { email: this.state.email } )
-    .then(
-      (json) => this.processOkResponse(json, 'saved'),
-      (err) => this.setState({
-        notice: {
-          type: 'error',
-          message: err.message, // The error message returned by the REST API
-        }
-      })
-    );
-  }
-
-  deleteSetting = () => {
-    this.fetchWP.delete( 'admin' )
-    .then(
-      (json) => this.processOkResponse(json, 'deleted'),
-      (err) => console.log('error', err)
-    );
-  }
-
-  processOkResponse = (json, action) => {
-    if (json.success) {
-      this.setState({
-        email: json.value,
-        savedEmail: json.value,
-        notice: {
-          type: 'success',
-          message: `Setting ${action} successfully.`,
-        }
-      });
-    } else {
-      this.setState({
-        notice: {
-          type: 'error',
-          message: `Setting was not ${action}.`,
-        }
-      });
-    }
-  }
-
-  updateInput = (event) => {
-    this.setState({
-      email: event.target.value,
-    });
-  }
-
-  handleSave = (event) => {
-    event.preventDefault();
-    if ( this.state.email === this.state.savedEmail ) {
-      this.setState({
-        notice: {
-          type: 'warning',
-          message: 'Setting unchanged.',
-        }
-      });
-    } else {
-      this.updateSetting();
-    }
-  }
-
-  handleDelete = (event) => {
-    event.preventDefault();
-    this.deleteSetting();
-  }
-
-  clearNotice = () => {
-    this.setState({
-      notice: false,
-    });
-  }
 
   render() {
-    let notice;
-    
-    if ( this.state.notice ) {
-      notice = <Notice notice={this.state.notice} onDismissClick={this.clearNotice} />
-    }
-
     return (
-      <div className="wrap">
-        {notice}
-        <form>
-          <h1>Contact Form Settings</h1>
-          
-          <label>
-          Notification Email:
-            <input
-              type="email"
-              value={this.state.email}
-              onChange={this.updateInput}
-            />
-          </label>
-
-          <button
-            id="save"
-            className="button button-primary"
-            onClick={this.handleSave}
-          >Save</button>
-
-          <button
-            id="delete"
-            className="button button-primary"
-            onClick={this.handleDelete}
-          >Delete</button>
-        </form>
+      <div>
+        <p>No settings for this Plugin. To use this plugin use shortcode [wpr-cards]</p>
+        <p>The shortcode uses the following 6 parameters: [wpr-cards title="" title_url="" image_src="" subtitle="" resource_desc="" resource_links=""]</p>
+        <p>"resource_desc" and "resource_links" are both strings that have each resource separated by a comma.</p>
+        <p>ex: [wpr-cards title="AAUW" title_url="https://www.aauw.org/" image_src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/American_Association_of_University_Women_logo.svg/1920px-American_Association_of_University_Women_logo.svg.png" subtitle="organization" resource_desc="Graduating to a Pay Gap (2012),Why So Few? (2010)" resource_links="http://witi.berkeley.edu/wp-content/uploads/2017/08/Graduating-To-A-Pay-Gap-AAUW-2012.pdf,http://witi.berkeley.edu/wp-content/uploads/2017/08/Why-So-Few-AAUW-2010.pdf"]</p>
+        <p>Developed by Antonio Franco using React.js and pangolin's <a href="https://github.com/gopangolin/wp-reactivate">WP Reactivate boilerplate</a> in June 2019.</p>
       </div>
-    );
+      
+    )
+    
   }
 }
 
