@@ -1,6 +1,3 @@
-### WP Reactivate Tutorial
+### Word Press Reactivate Cards
 
-This is a repository holding the code and steps for the following tutorials:
-
-* [Part 1](https://gopangolin.com/blog/building-wordpress-plugin-with-react-part-1/)
-* [Part 2](https://gopangolin.com/blog/building-wordpress-plugin-with-react-part-2/)
+This WordPress plugin is built off of pangolin's * [Reactivate](https://github.com/gopangolin/wp-reactivate) plug-in boilerplate.
